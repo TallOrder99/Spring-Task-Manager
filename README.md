@@ -17,7 +17,7 @@ A **Spring Boot** and **SQL**-based web application for managing tasks and proje
 - **Backend**: Spring Boot (Java)  
 - **Database**: SQL 
 - **Scheduling**: Spring Scheduler (`@Scheduled`)  
-- **Frontend**: Thymeleaf/React
+- **Frontend**: Thymeleaf
 
 ---
 
@@ -26,20 +26,20 @@ A **Spring Boot** and **SQL**-based web application for managing tasks and proje
 ### **Prerequisites**  
 - Java 17+  
 - Maven  
-- MySQL/PostgreSQL (or H2 for development)
-- -XAMPP
+- SQL
+- XAMPP
 
 ### **Setup & Run**  
 1. **Clone the repository**:  
    ```sh
-   git clone https://github.com/your-repo/task-management-system.git
-   cd task-management-system
+   git clone https://github.com/your-repo/spring-Task-Manager.git
+   cd spring-Task-Manager
    ```  
 
 2. **Configure the database**:  
    - Update `application.properties` (or `application.yml`):  
      ```properties
-     spring.datasource.url=jdbc:mysql://localhost:3306/taskdb
+     spring.datasource.url=jdbc:mysql://localhost:3306/taskmanagementdb
      spring.datasource.username=root
      spring.datasource.password=yourpassword
      spring.jpa.hibernate.ddl-auto=update
