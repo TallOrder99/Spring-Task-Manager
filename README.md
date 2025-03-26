@@ -32,7 +32,7 @@ A **Spring Boot** and **SQL**-based web application for managing tasks and proje
 ### **Setup & Run**  
 1. **Clone the repository**:  
    ```sh
-   git clone https://github.com/your-repo/spring-Task-Manager.git
+   git clone https://github.com/TallOrder99/spring-Task-Manager.git
    cd spring-Task-Manager
    ```  
 
