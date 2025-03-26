@@ -1,72 +1,75 @@
 # Spring-Task-Manager
-Task Management System
-A Spring Boot and SQL-based web application for managing tasks and projects, with an automated deadline scheduler to check for expired deadlines.
 
-📌 Features
+A **Spring Boot** and **SQL**-based web application for managing tasks and projects, with an automated **deadline scheduler** to check for expired deadlines.  
 
-✔ Task & Project Management – Create, update, and track tasks.
+---
 
-✔ User Authentication – Secure login and role-based access.
+## **📌 Features**  
+✔ **Task & Project Management** – Create, update, and track tasks.  
+✔ **User Authentication** – Secure login and role-based access.  
+✔ **Deadline Scheduler** – Automated background job checks for expired deadlines and sends alerts.  
+✔ **RESTful API** – Full CRUD operations for tasks and projects.  
+✔ **Database Integration** – Uses **SQL ** for data persistence.  
 
-✔ Deadline Scheduler – Automated background job checks for expired deadlines and sends alerts.
+---
 
-✔ RESTful API – Full CRUD operations for tasks and projects.
+## **🛠 Technologies Used**  
+- **Backend**: Spring Boot (Java)  
+- **Database**: SQL 
+- **Scheduling**: Spring Scheduler (`@Scheduled`)  
+- **Frontend**: Thymeleaf/React
 
-✔ Database Integration – Uses SQL (MySQL/PostgreSQL/H2) for data persistence.
+---
 
+## **🚀 Getting Started**  
 
-🛠 Technologies Used
+### **Prerequisites**  
+- Java 17+  
+- Maven  
+- MySQL/PostgreSQL (or H2 for development)
+- -XAMPP
 
-Backend: Spring Boot (Java)
+### **Setup & Run**  
+1. **Clone the repository**:  
+   ```sh
+   git clone https://github.com/your-repo/task-management-system.git
+   cd task-management-system
+   ```  
 
-Database: SQL (MySQL/PostgreSQL/H2)
+2. **Configure the database**:  
+   - Update `application.properties` (or `application.yml`):  
+     ```properties
+     spring.datasource.url=jdbc:mysql://localhost:3306/taskdb
+     spring.datasource.username=root
+     spring.datasource.password=yourpassword
+     spring.jpa.hibernate.ddl-auto=update
+     ```  
 
-Scheduling: Spring Scheduler (@Scheduled)
+3. **Run the application**:  
+   ```sh
+   mvn spring-boot:run
+   ```  
+   - The app will start at: `http://localhost:8086`
 
-API Documentation: Swagger/OpenAPI (optional)
+4. **Access APIs**:  
+   - Swagger UI (if enabled): `http://localhost:8080/swagger-ui.html`  
+   - REST Endpoints:  
+     - `GET /projects/viewprojectandtask` – List all tasks  
+     - `POST /newproject` – Create a new project
+     - `PUT /projects/edit/#id` – Update a task  
+     - `DELETE /projects/delete/#id` – Delete a task  
 
-Frontend: Thymeleaf/React (if applicable)
+---
 
-🚀 Getting Started
+## **⏰ Deadline Scheduler**  
+The system includes a **background scheduler** that checks for expired deadlines daily (configurable).  
 
-Prerequisites
-
-Java 17+
-
-Maven
-
-MySQL/PostgreSQL (or H2 for development)
-
-Setup & Run
-
-Clone the repository:
-
-git clone https://github.com/TallOrder/Spring-Task-Manager.git
-cd task-management-system
-
-
-Configure the database:
-
-
-Update application.properties (or application.yml):
-
-spring.datasource.url=jdbc:mysql://localhost:3306/taskdb
-spring.datasource.username=root
-spring.datasource.password=yourpassword
-spring.jpa.hibernate.ddl-auto=update
-
-Run the application: on cmd enter mvn spring-boot:run
-
-The app will start at: http://localhost:8080
-
-Access APIs:
-
-REST Endpoints:
-
-GET /api/tasks – List all tasks
-
-POST /api/tasks – Create a new task
-
-PUT /api/tasks/{id} – Update a task
-
-DELETE /api/tasks/{id} – Delete a task
+### **How It Works**  
+- Uses Spring’s `@Scheduled` annotation:  
+  ```java
+  @Scheduled(cron = "0 0 0 * * ?") // Runs every midnight
+  public void checkDeadlines() {
+      List<Task> expiredTasks = taskRepository.findByDeadlineBefore(LocalDate.now());
+      expiredTasks.forEach(task -> notifyUser(task));
+  }
+  ``` 
